@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cambridge One</title>
+    
+    <!-- Standard Favicon -->
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    
+    <!-- iOS Web App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cambridge One">
+    
+    <!-- iOS Icon -->
+    <link rel="apple-touch-icon" href="assets/icon.png">
+
+    <style>
+        /* Remove default margins and prevent scrolling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000; /* Fallback color */
+        }
+
+        /* Container to hold the image */
+        .fullscreen-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* The stretched image */
+        .fullscreen-image {
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* This stretches the image to fill the screen regardless of aspect ratio */
+            display: block;
+        }
+
+        /* Error message styling (hidden by default) */
+        #error-msg {
+            display: none;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="fullscreen-container">
+        <img 
+            src="assets/image.png" 
+            alt="Cambridge One" 
+            class="fullscreen-image"
+            onerror="handleImageError()"
+        >
+        <div id="error-msg">
+            <h2>Image not found</h2>
+            <p>Please ensure "assets/image.png" exists in your directory.</p>
+        </div>
+    </div>
+
+    <script>
+        function handleImageError() {
+            // Hide the broken image and show a friendly message if the asset is missing
+            document.querySelector('.fullscreen-image').style.display = 'none';
+            document.getElementById('error-msg').style.display = 'block';
+        }
+
+        // Prevent rubber-banding/bouncing on iOS
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>
